@@ -110,12 +110,21 @@ export class PokemonService implements OnModuleInit {
     }
     const winner = pokemon1.hp > 0 ? pokemon1 : pokemon2;
     const loser = winner === pokemon1 ? pokemon2 : pokemon1;
+    const date = new Date();
     //Guardar el resultado de la batalla en la base de datos
-    await this.saveBattleResult(winner, loser);
+    await this.saveBattleResult(winner, loser, date);
     return { winner, loser };
   }
-  async saveBattleResult(winner: Pokemon, loser: Pokemon): Promise<void> {
-    const battleResult = this.battleResultRepository.create({ winner, loser });
+  async saveBattleResult(
+    winner: Pokemon,
+    loser: Pokemon,
+    date: Date,
+  ): Promise<void> {
+    const battleResult = this.battleResultRepository.create({
+      winner,
+      loser,
+      date,
+    });
     await this.battleResultRepository.save(battleResult);
   }
 }

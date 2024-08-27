@@ -6,9 +6,12 @@ import { PokemonModule } from './pokemon/pokemon.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'pokemon-battle.sqlite',
+      database: 'database.sqlite',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // Sólo para desarrollo, en producción usar migraciones
+      migrations: [__dirname + '/migrations/*{.ts,.js}'],
+      synchronize: true,
+      //dropSchema: true,
+      logging: false,
     }),
     PokemonModule,
   ],

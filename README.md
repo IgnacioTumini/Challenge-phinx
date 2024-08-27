@@ -1,2 +1,0 @@
-# Challenge
-Batalla de pokemones
